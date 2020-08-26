@@ -97,12 +97,10 @@ nav a#trigger {
 }
 
 .buttons{
-    margin-top:500px;
     margin-right:20px;
     display:flex;
-    flex-wrap:nowrap;
+    flex-direction:row;
     justify-content:flex-end;
-    align-content:space-between;
 }
 
 a {
@@ -117,5 +115,6 @@ a {
 .list{
     margin-top:20px;
     margin-right:20px;
-    width:300px;
+    margin-left:20px;
+    width:400px;
 }

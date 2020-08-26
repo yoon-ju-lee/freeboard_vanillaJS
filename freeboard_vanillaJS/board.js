@@ -1,11 +1,10 @@
 init();
 
 function init(){
-    makeList();
+    makeTable();
 }
 
-function makeList(){
-
+function makeTable(){
     let table=document.createElement('div');
 
     for(let i=0; i<2; i++){
@@ -31,14 +30,18 @@ function getList(table){
     let list=localStorage.getItem('postingList1');
     let parsedList=JSON.parse(list);
     let item=parsedList[0]; 
-    console.log(item);  
+    //console.log(item);  
 
     //parsedList.map( )
+    let xkey=item.index+1;
     let xtitle=item.title;
     let xcontent=item.content; 
     
+    let firstColumn=table.firstChild.firstChild;
     let secondColumn=table.firstChild.firstChild.nextSibling;
     let thirdColumn= secondColumn.nextSibling;
+    
+    firstColumn.innerHTML=xkey;
     secondColumn.innerHTML=xtitle;
     thirdColumn.innerHTML=xcontent;
 
