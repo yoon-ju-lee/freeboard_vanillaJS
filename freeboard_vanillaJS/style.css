@@ -103,8 +103,8 @@ nav a#trigger {
     justify-content:flex-end;
 }
 
-a {
-    color:black;
+a:link, a:visited, a:hover, a:active {
+    color:gray;
     text-decoration:none;
 }
 
