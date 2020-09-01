@@ -45,8 +45,6 @@ function makeTable(){
         tr.style.marginLeft='150px'; 
         tr.style.textAlign='center';
 
-
-
             let td=document.createElement('td');
             td.style.border='1px solid black';
             td.style.width='30px';
@@ -69,6 +67,7 @@ function makeTable(){
     }
     document.body.appendChild(table);
 }
+
 
 
 
@@ -122,8 +121,7 @@ function clickPosting(index, title, content){
         let titleInput=document.createElement('input');
         titleInput.type='text';
         titleInput.setAttribute('id','titleInput2');
-        titleInput.setAttribute('value',title);
-        //titleInput.addEventListener('change', updateValue);        
+        titleInput.setAttribute('value',title);        
         form.appendChild(titleInput);
 
         let contentInput=document.createElement('input');
@@ -164,23 +162,6 @@ function clickPosting(index, title, content){
             localStorage.setItem('postingList1', stringfiedArray);
             location.href='board.html';
         }
-
-        // function editPosting(e){
-        //     e.preventDefault();
-        //     form=e.target;
-        //     let newTitle=form.querySelector('#titleInput2');
-        //     let newContent=form.querySelector('#contentInput2');
-        //     newTitle.setAttribute('value',e.target.value);
-        //     newContent.setAttribute('value',e.target.value);
-        //     let list=localStorage.getItem('postingList1');
-        //     let parsedList=JSON.parse(list);
-        //     parsedList[index].title=newTitle.value;
-        //     parsedList[index].content=newContent.value;
-        //     let stringfiedArray=JSON.stringify(parsedList);
-        //     localStorage.setItem('postingList1', stringfiedArray);
-        //     location.href='board.html';
-        // }
-    
     }
 
 
