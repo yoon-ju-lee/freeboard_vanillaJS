@@ -27,11 +27,13 @@ nav ul{
     /* 모바일 화면에서 메뉴가 안 보이다가 클릭했을 때만 보이도록 none으로 설정 */
     display:none;
     height:auto;
+    margin:0 auto;
+    
 }
 
 nav ul li{
     display:block;
-    width:120%;
+    width:90%;
     text-align:center;
     /* border-bottom은 밑줄 그어주기 */
     border-bottom:1px solid #576979;
@@ -48,6 +50,16 @@ nav a#trigger {
     padding-left:15px;
     line-height:40px;
     position:relative;
+}
+
+nav a#trigger::after{
+    content:"";
+    background:url('small3.png') no-repeat;
+    /* background-size:100% 안 하면 이미지가 잘려 일부만 보인다 */
+    background-size:100%;
+    /* 가상 엘리먼트는 꼭 너비와 높이를 지정한다 */
+    width:30px; height:30px; display:inline-block;
+    position:absolute; right:15px; top:5px;
 }
 
 
@@ -85,15 +97,7 @@ nav a#trigger {
         display:none;
     }
 
-    nav a#trigger::after{
-        content:"";
-        background:url('./small3.png') no-repeat;
-        /* background-size:100% 안 하면 이미지가 잘려 일부만 보인다 */
-        background-size:100%;
-        /* 가상 엘리먼트는 꼭 너비와 높이를 지정한다 */
-        width:30px; height:30px; display:inline-block;
-        position:absolute; right:15px; top:5px;
-    }
+   
 }
 
 .buttons{
@@ -101,10 +105,6 @@ nav a#trigger {
     display:inline-block;
 }
 
-a:link, a:visited, a:hover, a:active {
-    color:gray;
-    text-decoration:none;
-}
 
 .formArea{
     display:block;

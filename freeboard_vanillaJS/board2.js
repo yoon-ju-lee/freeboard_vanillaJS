@@ -97,19 +97,94 @@ function clickPosting(index, title, content){
     listButton.setAttribute('class','buttons');
     listButton.addEventListener('click', moveToList);
 
+    let modifyButton=document.createElement('button');
+    document.body.appendChild(modifyButton);
+    let modifyText=document.createTextNode('수정');
+    modifyButton.appendChild(modifyText);
+    modifyButton.setAttribute('class','buttons');
+    modifyButton.addEventListener('click', modifyPosting);
+
     let deleteButton=document.createElement('button');
     document.body.appendChild(deleteButton);
     let deleteText=document.createTextNode('삭제');
     deleteButton.appendChild(deleteText);
     deleteButton.setAttribute('class','buttons');
-    deleteButton.addEventListener('click', erase);
+    deleteButton.addEventListener('click', erasePosting);
 
 
     function moveToList(){
         location.href="board.html";
     }
 
-    function erase(){        
+    function modifyPosting(){
+        document.body.innerHTML='';
+        let form=document.createElement('form');
+        let titleInput=document.createElement('input');
+        titleInput.type='text';
+        titleInput.setAttribute('id','titleInput2');
+        titleInput.setAttribute('value',title);
+        //titleInput.addEventListener('change', updateValue);        
+        form.appendChild(titleInput);
+
+        let contentInput=document.createElement('input');
+        contentInput.type='text';
+        contentInput.setAttribute('id','contentInput2');
+        contentInput.setAttribute('value',content);
+        form.appendChild(contentInput);
+
+        let submitButton=document.createElement('input');
+        submitButton.type='submit';
+        form.appendChild(submitButton);
+        document.body.appendChild(form);
+        form.addEventListener('submit', editPosting);
+
+
+        function editPosting(e){
+            let newTitle=form.querySelector('#titleInput2');
+            let newContent=form.querySelector('#contentInput2');
+            if(title!==e.target.value && content===e.target.value){
+                newTitle.setAttribute('value', title);
+                newContent.setAttribute('value', e.target.value);
+            }else if(title===e.target.value && content!==e.target.value){
+                newTitle.setAttribute('value', e.target.value);
+                newContent.setAttribute('value', content);
+            }else if(title!==e.target.value && content!==e.target.value){
+                newTitle.setAttribute('value',title);
+                newContent.setAttribute('value',content);
+            }else if(title===e.target.value && content===e.target.value){
+                newTitle.setAttribute('value', e.target.value);
+                newContent.setAttribute('value', e.target.value);
+            }
+            
+            let list=localStorage.getItem('postingList1');
+            let parsedList=JSON.parse(list);
+            parsedList[index].title=newTitle.value;
+            parsedList[index].content=newContent.value;
+            let stringfiedArray=JSON.stringify(parsedList);
+            localStorage.setItem('postingList1', stringfiedArray);
+            location.href='board.html';
+        }
+
+        // function editPosting(e){
+        //     e.preventDefault();
+        //     form=e.target;
+        //     let newTitle=form.querySelector('#titleInput2');
+        //     let newContent=form.querySelector('#contentInput2');
+        //     newTitle.setAttribute('value',e.target.value);
+        //     newContent.setAttribute('value',e.target.value);
+        //     let list=localStorage.getItem('postingList1');
+        //     let parsedList=JSON.parse(list);
+        //     parsedList[index].title=newTitle.value;
+        //     parsedList[index].content=newContent.value;
+        //     let stringfiedArray=JSON.stringify(parsedList);
+        //     localStorage.setItem('postingList1', stringfiedArray);
+        //     location.href='board.html';
+        // }
+    
+    }
+
+
+    function erasePosting(){        
         let list=localStorage.getItem('postingList1');
         let parsedList=JSON.parse(list);
         parsedList.splice(index,1);

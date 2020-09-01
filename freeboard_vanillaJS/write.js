@@ -1,8 +1,5 @@
 let array=[];
-let index=0;
-
-const form=document.querySelector('.formArea');
-form.addEventListener("submit",submitForm);
+let index;
 
 init();
 
@@ -14,6 +11,10 @@ function init(){
     array=newList;
     //console.log(array);
 }
+
+
+const form=document.querySelector('.formArea');
+form.addEventListener("submit",submitForm);
 
 function submitForm(event){
     event.preventDefault();
@@ -33,7 +34,6 @@ function submitForm(event){
     let key=array.length-1;
     item.index=key;
 
-    //console.log(Object.keys(array));
     let stringfiedArray=JSON.stringify(array);
     localStorage.setItem('postingList1', stringfiedArray);
     
@@ -75,25 +75,11 @@ function showPosting(){
     let listText=document.createTextNode('목록');
     listButton.appendChild(listText);
     listButton.marginTop='500px';
-    //listButton.setAttribute('class','buttons');
+    listButton.setAttribute('class','buttons');
     listButton.addEventListener('click', moveToList);
 
-    let deleteButton=document.createElement('button');
-    document.body.appendChild(deleteButton);
-    let deleteText=document.createTextNode('삭제');
-    deleteButton.appendChild(deleteText);
-    //deleteButton.setAttribute('class','buttons');
-    deleteButton.addEventListener('click', erase);
 }
 
 function moveToList(){
-    location.href="board.html";
-}
-
-function erase(){
-    let item=array[array.length-1];
-    array.pop(item);
-    let stringfiedArray=JSON.stringify(array);
-    localStorage.setItem('postingList1', stringfiedArray);
     location.href="board.html";
 }
