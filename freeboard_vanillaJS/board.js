@@ -1,165 +1,57 @@
-//let table=document.createElement('table');
-//table.style.border='1px solid black';
 let list=localStorage.getItem('postingList1');
 let parsedList=JSON.parse(list);
 let number=parsedList.length-1;
 let number2=Math.ceil(number/10);
 let number3;
-let arr=[];
+let pageArray=[];
 
 
 init();
 
 function init(){
-    makeTable();
+    loadBoard();
 }
 
 
-function makeTable(){
-    let table=document.createElement('table');
-    table.style.border='1px solid black';
-    table.style.marginLeft='5vw';
-    table.style.marginRight='5vw';
+function loadBoard(){
     console.log(parsedList);
-
-    makeFirstRow();
-   
-        for(let i=number; i>number-10; i--){
-            let item=parsedList[i];
-            let tr=document.createElement('tr');
-            tr.style.border='1px solid black';
-            //tr.style.height='25px';
-            //tr.style.marginLeft='150px'; 
-            tr.style.textAlign='center';
-    
-                let td=document.createElement('td');
-                td.style.border='1px solid black';
-                td.style.width='10vw';
-                td.textContent=item.index+1;
-                tr.appendChild(td); 
-    
-                let td2=document.createElement('td');
-                td2.style.border='1px solid black';
-                td2.style.width='60vw';
-                td2.textContent=item.title;
-                td2.onclick=function(){clickPosting(item.index, item.title, item.content)};
-                tr.appendChild(td2);            
-    
-                let td3=document.createElement('td');
-                td3.style.border='1px solid black';
-                td3.style.width='40vw';
-                td3.textContent=item.date;
-                tr.appendChild(td3);
-                table.appendChild(tr);
-        }
-    
-    document.body.appendChild(table);
-
-    
-    for(let i=0; i<number2; i++){
-        let span=document.createElement('span');
-        arr.push(i);
-        span.innerHTML=` ${arr[i]+1} `;
-        span.style.textAlign='center';
-        document.body.appendChild(span);
-        span.onclick=function(){goToPage(i)};
-    } 
-    
-
+    makeFirstRow();   
+    let variable=number;
+    let variable2=number-9;
+    makeTable(variable, variable2);     
+    makePageIndex();
 }
-
-
-
 
 
 function goToPage(pageNumber){
     document.body.innerHTML='';
-
     makeMenu();
     makeFirstRow();
 
-    let table2=document.createElement('table');
+    number3=number-10*pageNumber;  
 
-    number3=number-10*pageNumber;
-
-    if(number3>10){
-        for(let i=number3; i>number3-10; i--){
-            let list=localStorage.getItem('postingList1');
-            let parsedList=JSON.parse(list);
-            let item=parsedList[i];
-            let tr=document.createElement('tr');
-            tr.style.border='1px solid black';
-            tr.style.height='25px';
-            tr.style.marginLeft='150px'; 
-            tr.style.textAlign='center';
-    
-                let td=document.createElement('td');
-                td.style.border='1px solid black';
-                td.style.width='40px';
-                td.textContent=item.index+1;
-                tr.appendChild(td); 
-    
-                let td2=document.createElement('td');
-                td2.style.border='1px solid black';
-                td2.style.width='250px';
-                td2.textContent=item.title;
-                td2.onclick=function(){clickPosting(item.index, item.title, item.content)};
-                tr.appendChild(td2);            
-    
-                let td3=document.createElement('td');
-                td3.style.border='1px solid black';
-                td3.style.width='200px';
-                td3.textContent=item.date;
-                tr.appendChild(td3);
-                table2.appendChild(tr);
-        }
-    
-        document.body.appendChild(table2);
+    if(number3>9){
+        let variable=number3;
+        let variable2=number3-9;
+        makeTable(variable,variable2);
+        makePageIndex();
     }else{
-        for(let i=number3; i>=0; i--){
-            let list=localStorage.getItem('postingList1');
-            let parsedList=JSON.parse(list);
-            let item=parsedList[i];
-            let tr=document.createElement('tr');
-            tr.style.border='1px solid black';
-            tr.style.height='25px';
-            tr.style.marginLeft='150px'; 
-            tr.style.textAlign='center';
-    
-                let td=document.createElement('td');
-                td.style.border='1px solid black';
-                td.style.width='40px';
-                td.textContent=item.index+1;
-                tr.appendChild(td); 
-    
-                let td2=document.createElement('td');
-                td2.style.border='1px solid black';
-                td2.style.width='250px';
-                td2.textContent=item.title;
-                td2.onclick=function(){clickPosting(item.index, item.title, item.content)};
-                tr.appendChild(td2);            
-    
-                let td3=document.createElement('td');
-                td3.style.border='1px solid black';
-                td3.style.width='200px';
-                td3.textContent=item.date;
-                tr.appendChild(td3);
-                table2.appendChild(tr);
-        }
-    
-        document.body.appendChild(table2); 
+        let variable=number3;
+        let variable2=0;
+        makeTable(variable,variable2);
+        makePageIndex();
     }
 
-    
-    for(let i=0; i<number2; i++){
-        let span=document.createElement('span');
-        arr.push(i);
-        span.innerHTML=` ${arr[i]+1} `;
-        span.style.textAlign='center';
-        document.body.appendChild(span);
-        span.onclick=function(){goToPage(i)};
-    } 
-        
+    let div=document.createElement('div');
+    document.body.appendChild(div);
+    let writeButton=document.createElement('button');
+    let writeButtonText=document.createTextNode('글쓰기');
+    writeButton.appendChild(writeButtonText);
+    writeButton.addEventListener('click', function(){
+        location.href='write.html';
+    });
+    writeButton.style.marginTop='5vh';
+    document.body.appendChild(writeButton);
 }
 
 
@@ -169,6 +61,8 @@ function clickPosting(index, title, content){
     document.body.innerHTML='';
     let table=document.createElement('table');
     table.style.border='1px solid black';
+    table.style.marginTop='3vh';
+    table.style.marginLeft='2vw';
     table.style.width='350px';
     let tr2=document.createElement('tr');
     tr2.textContent=title;
@@ -210,6 +104,8 @@ function clickPosting(index, title, content){
     function modifyPosting(){
         document.body.innerHTML='';
         let form=document.createElement('form');
+        form.style.marginTop='3vh';
+        form.style.marginLeft='2vw';
         let titleInput=document.createElement('input');
         titleInput.type='text';
         titleInput.setAttribute('id','titleInput2');
@@ -311,23 +207,23 @@ function makeMenu(){
 function makeFirstRow(){
     let table=document.createElement('table');
     table.style.border='1px solid black';
+    table.style.marginTop='2vw';
     table.style.marginLeft='5vw';
     table.style.marginRight='5vw';
     let firstRow=document.createElement('tr');
     firstRow.style.textAlign='center';
-    firstRow.style.border='1px solid black';
 
     let index=document.createElement('td');
     let indexText=document.createTextNode('번호');
     index.style.border='1px solid black';
-    index.style.width='10vw';
+    index.style.width='9.9vw';
     index.appendChild(indexText);
     firstRow.appendChild(index);
 
     let title=document.createElement('td');
     let titleText=document.createTextNode('제목');
     title.style.border='1px solid black';
-    title.style.width='60vw';
+    title.style.width='59.5vw';
     title.appendChild(titleText);
     firstRow.appendChild(title);
 
@@ -344,8 +240,6 @@ function makeFirstRow(){
 
 
 
-
-
 function moveToList(){
     location.href="board.html";
 }
@@ -354,4 +248,55 @@ function moveToList(){
 
 function moveToHome(){
     location.href='index.html';
+}
+
+
+
+function makeTable(variable, variable2){
+    let table=document.createElement('table');
+    table.style.border='1px solid black';
+    table.style.marginLeft='5vw';
+    table.style.marginRight='5vw';
+
+    for(let i=variable; i>=variable2; i--){
+        let item=parsedList[i];
+        let tr=document.createElement('tr');
+        tr.style.border='1px solid black';
+        tr.style.textAlign='center';
+
+            let td=document.createElement('td');
+            td.style.border='1px solid black';
+            td.style.width='10vw';
+            td.textContent=item.index+1;
+            tr.appendChild(td); 
+
+            let td2=document.createElement('td');
+            td2.style.border='1px solid black';
+            td2.style.width='60vw';
+            td2.textContent=item.title;
+            td2.onclick=function(){clickPosting(item.index, item.title, item.content)};
+            tr.appendChild(td2);            
+
+            let td3=document.createElement('td');
+            td3.style.border='1px solid black';
+            td3.style.width='40vw';
+            td3.textContent=item.date;
+            tr.appendChild(td3);
+            table.appendChild(tr);
+    }
+
+    document.body.appendChild(table);
+}
+
+
+
+function makePageIndex(){
+    for(let i=0; i<number2; i++){
+        let span=document.createElement('span');
+        pageArray.push(i);
+        span.innerHTML=` ${pageArray[i]+1} `;
+        span.style.textAlign='center';
+        document.body.appendChild(span);
+        span.onclick=function(){goToPage(i)};
+    } 
 }

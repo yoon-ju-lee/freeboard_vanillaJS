@@ -33,8 +33,9 @@ nav ul{
 
 nav ul li{
     display:block;
-    width:90%;
+    width:100%;
     text-align:center;
+    color:white;
     /* border-bottom은 밑줄 그어주기 */
     border-bottom:1px solid #576979;
 }
@@ -96,8 +97,13 @@ nav a#trigger::after{
     nav a#trigger{
         display:none;
     }
+}
 
-   
+
+
+
+table{
+    border-collapse: collapse;
 }
 
 .buttons{
