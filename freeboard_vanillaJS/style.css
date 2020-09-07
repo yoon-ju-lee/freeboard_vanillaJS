@@ -27,7 +27,7 @@ nav ul{
     /* 모바일 화면에서 메뉴가 안 보이다가 클릭했을 때만 보이도록 none으로 설정 */
     display:none;
     height:auto;
-    margin:0 auto;
+    
     
 }
 
@@ -55,17 +55,15 @@ nav a#trigger {
 
 nav a#trigger::after{
     content:"";
-    background:url('small3.png') no-repeat;
-    /* background-size:100% 안 하면 이미지가 잘려 일부만 보인다 */
+    background:url('hamburgerbutton.png') no-repeat;
     background-size:100%;
-    /* 가상 엘리먼트는 꼭 너비와 높이를 지정한다 */
     width:30px; height:30px; display:inline-block;
     position:absolute; right:15px; top:5px;
 }
 
 
 
-@media screen and (min-width:721px){
+@media screen and (min-width:600px){
     nav{
         height:40px;
         border-bottom:2px solid #34495e;
@@ -114,11 +112,9 @@ table{
 
 .formArea{
     display:block;
+    margin-top:2vh;
+    margin-left:2vw;
+    margin-right:2vw;
+    width:70vw;
 }
 
-.list{
-    margin-top:20px;
-    margin-right:20px;
-    margin-left:20px;
-    width:400px;
-}

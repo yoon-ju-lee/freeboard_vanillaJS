@@ -61,33 +61,34 @@ function showPosting(){
     
     let container=document.createElement('div');
     document.body.appendChild(container);
-    container.style.marginTop='30px';
-    container.style.marginLeft='30px';
-    container.style.width='600px';
+    container.style.marginTop='2vh';
+    container.style.marginLeft='2vw';
+    container.style.marginRight='2vw';
+    container.style.width='70vw';
     
 
     let titleArea=document.createElement('div');
     container.appendChild(titleArea);
     titleArea.textContent=showTitle;
     titleArea.style.border='1px solid black';
-    titleArea.style.padding='5px';
+    titleArea.style.padding='1vh';
 
     let contentArea=document.createElement('div');
     container.appendChild(contentArea);
     contentArea.textContent=showContent;
-    contentArea.style.padding='5px';
+    contentArea.style.padding='1vh';
     contentArea.style.border='1px solid black';
 
     let listButton=document.createElement('button');
     document.body.appendChild(listButton);
     let listText=document.createTextNode('목록');
     listButton.appendChild(listText);
-    listButton.style.marginTop='100px';
+    listButton.style.marginTop='5vh';
+    listButton.style.marginLeft='2vw';
     listButton.setAttribute('class','buttons');
-    listButton.addEventListener('click', moveToList);
+    listButton.addEventListener('click', function(){
+        location.href="board.html";
+    });
 
 }
 
-function moveToList(){
-    location.href="board.html";
-}
