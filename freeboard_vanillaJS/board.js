@@ -225,7 +225,7 @@ function makeMenu(){
     
 }
 
-
+   
 
 function moveToList(){
     location.href="board.html";
