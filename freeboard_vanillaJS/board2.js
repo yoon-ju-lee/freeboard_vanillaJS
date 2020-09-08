@@ -14,7 +14,7 @@ function init(){
 
 
 function loadBoard(){
-    console.log(parsedList);
+    //console.log(parsedList);
      
     let variable=number;
     let variable2=number-9;
@@ -101,23 +101,11 @@ function clickPosting(index, title, content){
     deleteButton.setAttribute('class','buttons');
     deleteButton.addEventListener('click', erasePosting);
 
+
+    replyInput(index);  
     reply(index);
-
-    function reply(index){
-        replyInput(index);
-        let replyArray=parsedList[index].replies
-        for(let i=0; i<replyArray.length; i++){
-            
-            let div=document.createElement('div');
-            let data=localStorage.getItem('postingList1');
-            let parsedData=JSON.parse(data);
-            div.innerHTML=parsedData[index].replies[i].content;
-            document.body.appendChild(div);
-            
-        } 
-    }
-
-
+    
+    
 
 
     function modifyPosting(){
@@ -172,18 +160,18 @@ function clickPosting(index, title, content){
     }
 
 
-    function erasePosting(){        
-        //let list=localStorage.getItem('postingList1');
-        //let parsedList=JSON.parse(list);
-        parsedList.splice(index,1);
-        for(let i=0; i<parsedList.length; i++){
-            temp=i;
-            parsedList[i].index=temp;
+        function erasePosting(){        
+            //let list=localStorage.getItem('postingList1');
+            //let parsedList=JSON.parse(list);
+            parsedList.splice(index,1);
+            for(let i=0; i<parsedList.length; i++){
+                temp=i;
+                parsedList[i].index=temp;
+            }
+            let stringfiedArray=JSON.stringify(parsedList);
+            localStorage.setItem('postingList1', stringfiedArray);
+            location.href="board.html";
         }
-        let stringfiedArray=JSON.stringify(parsedList);
-        localStorage.setItem('postingList1', stringfiedArray);
-        location.href="board.html";
-    }
 }
 
 
@@ -222,10 +210,13 @@ function makeMenu(){
         document.body.appendChild(nav);
 
     }else{
-        let div=document.createElement('div');
-        div.setAttribute('id','trigger');
-        div.textContent='MENU';
-        document.body.appendChild(div);
+        let nav=document.createElement('nav');
+        let a=document.createElement('a');
+        a.setAttribute('id','trigger');
+        a.textContent='MENU';
+        a.style.color='white';
+        nav.appendChild(a);
+        document.body.appendChild(nav);
     }
     
 }
@@ -323,6 +314,27 @@ function makePageIndex(){
 }
 
 
+
+
+
+function reply(index){
+    
+    if(parsedList[index].replies!==undefined){
+        let replies=parsedList[index].replies;
+        for(let i=0; i<replies.length; i++){            
+            let div=document.createElement('div');
+            let data=localStorage.getItem('postingList1');
+            let parsedData=JSON.parse(data);
+            div.innerHTML=parsedData[index].replies[i].content;
+            document.body.appendChild(div);            
+        } 
+    }
+} 
+
+
+
+
+
 function replyInput(index){
     let replyArray=[];
     let replyForm=document.createElement('form');    
@@ -348,17 +360,30 @@ function replyInput(index){
         let item={};
         item.content=value;
         replyArray.push(item);
-        let key=replyArray.length-1;
-        item.key=key;
 
-        parsedList[index].replies=replyArray;
-    
+        if(parsedList[index].replies!==undefined){
+            let repliesArray=parsedList[index].replies;
+            let temp=repliesArray.concat(replyArray);
+            parsedList[index].replies=temp;
+            let key=temp.length-1;
+            item.key=key;
+        }else{
+            let key=replyArray.length-1;
+            item.key=key;
+            parsedList[index].replies=replyArray;
+            
+        }
+        
+
         let stringifiedArray=JSON.stringify(parsedList);
         localStorage.setItem('postingList1',stringifiedArray);
 
         
         input2.value='';
         
+        let div=document.createElement('div');
+        div.textContent=item.content;
+        document.body.appendChild(div);
     }
 
 }
