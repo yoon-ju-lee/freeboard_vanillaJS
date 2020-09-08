@@ -351,12 +351,12 @@ function submitReply(e){
     localStorage.setItem('replies',stringifiedReplyArray);
     
     
-    let div=document.createElement('textarea');
+    let div=document.createElement('div');
     let data=localStorage.getItem('replies');
     let parsedData=JSON.parse(data);
-    div.innerHTML=parsedData[3].content;
+    div.innerHTML=parsedData[0].content;
     document.body.appendChild(div);
 
-    replyForm.querySelector('input').value='';
-    replyForm.querySelector('input').autofocus();
+    input2.value='';
+    
 }
