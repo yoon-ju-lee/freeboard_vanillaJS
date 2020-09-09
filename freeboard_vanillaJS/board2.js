@@ -6,6 +6,8 @@ let number3;
 let pageArray=[];
 
 
+        
+
 init();
 
 function init(){
@@ -211,12 +213,52 @@ function makeMenu(){
 
     }else{
         let nav=document.createElement('nav');
+        let ul=document.createElement('ul');
+        let li=document.createElement('li');
+        let liText=document.createTextNode('HOME');
+        li.appendChild(liText);
+        li.addEventListener('click', moveToHome);
+        ul.appendChild(li);
+
+        let li2=document.createElement('li');
+        let li2Text=document.createTextNode('BOARD');
+        li2.appendChild(li2Text);
+        li2.addEventListener('click', moveToList);
+        ul.appendChild(li2);
+
+        let li3=document.createElement('li');
+        let li3Text=document.createTextNode('GUESTBOOK');
+        li3.appendChild(li3Text);
+        let link3=document.createElement('a');
+        link3.setAttribute('href', '#');
+        link3.setAttribute('title','#');
+        li3.appendChild(link3);
+        ul.appendChild(li3);
+
+        nav.appendChild(ul);
+
         let a=document.createElement('a');
         a.setAttribute('id','trigger');
         a.textContent='MENU';
         a.style.color='white';
         nav.appendChild(a);
         document.body.appendChild(nav);
+
+
+        $(function(){
+            var trigger=$('#trigger');
+            var menu=$('nav ul');
+            $(trigger).on('click',function(e){
+                e.preventDefault();
+                menu.slideToggle();
+            });
+            $(window).resize(function(){
+                var w=$(window).width();
+                if(w>320 && menu.is(':hidden')){
+                    menu.removeAttr('style');
+                }
+            })
+        })
     }
     
 }
@@ -320,13 +362,17 @@ function makePageIndex(){
 function reply(index){
     
     if(parsedList[index].replies!==undefined){
-        let replies=parsedList[index].replies;
-        for(let i=0; i<replies.length; i++){            
+        let reply=parsedList[index].replies;
+    
+
+        for(let i=0; i<reply.length; i++){        
+              
             let div=document.createElement('div');
             let data=localStorage.getItem('postingList1');
             let parsedData=JSON.parse(data);
             div.innerHTML=parsedData[index].replies[i].content;
-            document.body.appendChild(div);            
+            document.body.appendChild(div);  
+                     
         } 
     }
 } 
