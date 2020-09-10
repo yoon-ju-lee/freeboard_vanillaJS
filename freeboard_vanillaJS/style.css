@@ -1,8 +1,7 @@
 *{
     margin:0;
-    padding:10;
+    /* padding:10; */
     box-sizing:border-box;
-    /* -moz-box-sizing:border-box는 익스플로러 8 버전에서만 사용 */
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
 }
@@ -11,42 +10,48 @@
 a:link, a:hover, a:visited{
     color:#fff;
     text-decoration:none;
-    text-shadow:1px 1px 0 #283744;
+    text-shadow:1px 1px 0 #3b3b3b;
 }
 
 nav{
     width:100%;
     height:auto;
-    background:#34495e;
+    background:#303030;
     font-size:1.2em;
-    font-weight:bold;
+    /* font-weight:bold; */
     position:relative;
+    padding-left:0px;
 }
 
 nav ul{
-    /* 모바일 화면에서 메뉴가 안 보이다가 클릭했을 때만 보이도록 none으로 설정 */
     display:none;
     height:auto;
-    
+    padding-left:0px;
     
 }
 
 nav ul li{
     display:block;
     width:100%;
+    padding-left:0px;
+    left:0;
     text-align:center;
     color:white;
-    /* border-bottom은 밑줄 그어주기 */
-    border-bottom:1px solid #576979;
+    border-bottom:1px solid #555555;
 }
 
+.active {
+    display:block;
+}
+
+
 nav ul li a{
-    line-height:50px;
+    line-height:40px;
 }
 
 nav a#trigger {
     display:block;
-    background-color:#283744;
+    background-color:#303030;
     width:100%;
     padding-left:15px;
     line-height:40px;
@@ -58,7 +63,9 @@ nav a#trigger::after{
     background:url('hamburgerbutton.png') no-repeat;
     background-size:100%;
     width:30px; height:30px; display:inline-block;
-    position:absolute; right:15px; top:5px;
+    position:absolute; 
+    right:15px; 
+    top:5px;
 }
 
 
@@ -66,23 +73,26 @@ nav a#trigger::after{
 @media screen and (min-width:600px){
     nav{
         height:40px;
-        border-bottom:2px solid #34495e;
+        border-bottom:2px solid #303030;
     }
 
     nav ul{
         display:block;
         height:40px; padding:0; text-align:center;
         margin: 0 auto;
+        height:40px;
     }
 
 
     nav ul li{
         display:inline-block;
-        width:140px; border-bottom:0; border-right:1px solid #576979;
+        width:140px; border-bottom:0; border-right:1px solid #555555;
         margin-right:0px;
+        height:40px;
+        line-height:40px;
     }
 
-    /* 맨 오른쪽 메뉴는 오른쪽에 줄이 있을 필요가 없다 */
+
     nav ul li:last-child{
         border-right:0;
     }

@@ -182,29 +182,19 @@ function clickPosting(index, title, content){
 
 function makeMenu(){
     if(window.innerWidth>600){
-        let nav=document.createElement('nav');
-        let ul=document.createElement('ul');
+        let nav=document.createElement('nav');        
+        let ul=document.createElement('ul');        
         let li=document.createElement('li');
         let liText=document.createTextNode('HOME');
         li.appendChild(liText);
         li.addEventListener('click', moveToHome);
         ul.appendChild(li);
 
-
         let li2=document.createElement('li');
         let li2Text=document.createTextNode('BOARD');
         li2.appendChild(li2Text);
         li2.addEventListener('click', moveToList);
         ul.appendChild(li2);
-
-        let li3=document.createElement('li');
-        let li3Text=document.createTextNode('GUESTBOOK');
-        li3.appendChild(li3Text);
-        let link3=document.createElement('a');
-        link3.setAttribute('href', '#');
-        link3.setAttribute('title','#');
-        li3.appendChild(link3);
-        ul.appendChild(li3);
         
         nav.appendChild(ul);
         document.body.appendChild(nav);
@@ -215,23 +205,17 @@ function makeMenu(){
         let li=document.createElement('li');
         let liText=document.createTextNode('HOME');
         li.appendChild(liText);
+        li.style.lineHeight='50px';
+        li.style.width='100%';
         li.addEventListener('click', moveToHome);
         ul.appendChild(li);
 
         let li2=document.createElement('li');
         let li2Text=document.createTextNode('BOARD');
         li2.appendChild(li2Text);
+        li2.style.lineHeight='50px';
         li2.addEventListener('click', moveToList);
         ul.appendChild(li2);
-
-        let li3=document.createElement('li');
-        let li3Text=document.createTextNode('GUESTBOOK');
-        li3.appendChild(li3Text);
-        let link3=document.createElement('a');
-        link3.setAttribute('href', '#');
-        link3.setAttribute('title','#');
-        li3.appendChild(link3);
-        ul.appendChild(li3);
 
         nav.appendChild(ul);
 
@@ -341,7 +325,7 @@ function makeTable(variable, variable2){
 function makePageIndex(){
     let div=document.createElement('div');
     div.style.textAlign='center';
-    div.style.marginTop='3vh';
+    div.style.marginTop='2vh';
     for(let i=0; i<=number2; i++){
         let span=document.createElement('span');
         pageArray.push(i);
