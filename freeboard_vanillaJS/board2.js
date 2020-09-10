@@ -15,9 +15,7 @@ function init(){
 }
 
 
-function loadBoard(){
-    //console.log(parsedList);
-     
+function loadBoard(){     
     let variable=number;
     let variable2=number-9;
     makeTable(variable, variable2);     
@@ -46,7 +44,7 @@ function goToPage(pageNumber){
 
     let div=document.createElement('div');
     div.style.marginTop='3vh';
-    div.style.marginLeft='3vw';
+    div.style.marginLeft='5vw';
     div.style.marginBottom='1vh';
     let writeButton=document.createElement('button');
     let writeButtonText=document.createTextNode('글쓰기');
@@ -67,16 +65,17 @@ function clickPosting(index, title, content){
     let table=document.createElement('table');
     table.style.border='1px solid black';
     table.style.marginTop='3vh';
-    table.style.marginLeft='2vw';
-    table.style.width='350px';
+    table.style.marginLeft='5vw';
+    table.style.width='90vw';
     let tr2=document.createElement('tr');
     tr2.textContent=title;
-    tr2.style.border='1px solid black';    
+    tr2.style.border='1px solid black';   
     table.appendChild(tr2);
 
     let tr3=document.createElement('tr');
     tr3.textContent=content;
     tr3.style.border='1px solid black';
+    tr3.style.height='30vh';
     table.appendChild(tr3);
     document.body.appendChild(table);
 
@@ -85,7 +84,8 @@ function clickPosting(index, title, content){
     document.body.appendChild(listButton);
     let listText=document.createTextNode('목록');
     listButton.appendChild(listText);
-    listButton.style.marginTop='100px';
+    listButton.style.marginTop='3vh';
+    listButton.style.marginLeft='5vw';
     listButton.setAttribute('class','buttons');
     listButton.addEventListener('click', moveToList);
 
@@ -114,7 +114,7 @@ function clickPosting(index, title, content){
         document.body.innerHTML='';
         let form=document.createElement('form');
         form.style.marginTop='3vh';
-        form.style.marginLeft='2vw';
+        form.style.marginLeft='5vw';
         let titleInput=document.createElement('input');
         titleInput.type='text';
         titleInput.setAttribute('id','titleInput2');
@@ -177,8 +177,6 @@ function clickPosting(index, title, content){
 }
 
 
-
-////////
 
 
 
@@ -282,8 +280,8 @@ function makeTable(variable, variable2){
     let table=document.createElement('table');
     table.style.border='1px solid black';
     table.style.marginTop='3vh';
-    table.style.marginLeft='3vw';
-    table.style.marginRight='3vw';
+    table.style.marginLeft='5vw';
+    table.style.marginRight='5vw';
     let firstRow=document.createElement('tr');
     firstRow.style.textAlign='center';
 
@@ -344,7 +342,7 @@ function makePageIndex(){
     let div=document.createElement('div');
     div.style.textAlign='center';
     div.style.marginTop='3vh';
-    for(let i=0; i<number2; i++){
+    for(let i=0; i<=number2; i++){
         let span=document.createElement('span');
         pageArray.push(i);
         span.innerHTML=` ${pageArray[i]+1} `;
@@ -371,6 +369,8 @@ function reply(index){
             let data=localStorage.getItem('postingList1');
             let parsedData=JSON.parse(data);
             div.innerHTML=parsedData[index].replies[i].content;
+            div.style.marginLeft='5vw';
+            div.style.marginTop='0.5vh';
             document.body.appendChild(div);  
                      
         } 
@@ -387,6 +387,8 @@ function replyInput(index){
     let input=document.createElement('input');
     input.type='text';
     input.placeholder='댓글';
+    input.style.marginTop='3vh';
+    input.style.marginLeft='5vw';
     replyForm.appendChild(input);
 
     let submitButton2=document.createElement('input');
