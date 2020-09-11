@@ -30,7 +30,7 @@ function makePageIndex(){
     let div=document.createElement('div');
     div.style.textAlign='center';
     div.style.marginTop='2vh';
-    for(let i=0; i<=number2; i++){
+    for(let i=0; i<number2; i++){
         let span=document.createElement('span');
         pageArray.push(i);
         span.innerHTML=` ${pageArray[i]+1} `;
