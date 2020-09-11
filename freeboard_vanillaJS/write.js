@@ -30,9 +30,7 @@ function submitForm(event){
     let year=writingDate.getFullYear();
     let month=writingDate.getMonth()+1;
     let day=writingDate.getDate();
-    let hour=writingDate.getHours();
-    let minute=writingDate.getMinutes();
-    let formattedDate=`${year}년 ${month}월 ${day}일  ${hour>=10 ? hour : `0${hour}`}시 ${minute>=10 ? minute : `0${minute}`}분`;
+    let formattedDate=`${year}년 ${month}월 ${day}일`;
 
     let item={};
     item.title=getTitle;
@@ -55,16 +53,15 @@ function showPosting(){
     let list=localStorage.getItem('postingList1');
     let parsedList=JSON.parse(list);
     let item=parsedList[parsedList.length-1]; 
-    //console.log(item);  
     let showTitle=item.title;
     let showContent=item.content; 
     
     let container=document.createElement('div');
     document.body.appendChild(container);
     container.style.marginTop='2vh';
-    container.style.marginLeft='2vw';
-    container.style.marginRight='2vw';
-    container.style.width='70vw';
+    container.style.marginLeft='5vw';
+    container.style.marginRight='5vw';
+    container.style.width='90vw';
     
 
     let titleArea=document.createElement('div');
@@ -77,6 +74,7 @@ function showPosting(){
     container.appendChild(contentArea);
     contentArea.textContent=showContent;
     contentArea.style.padding='1vh';
+    contentArea.style.height='50vh';
     contentArea.style.border='1px solid black';
 
     let listButton=document.createElement('button');
@@ -84,8 +82,8 @@ function showPosting(){
     let listText=document.createTextNode('목록');
     listButton.appendChild(listText);
     listButton.style.marginTop='5vh';
-    listButton.style.marginLeft='2vw';
-    listButton.setAttribute('class','buttons');
+    listButton.style.marginLeft='5vw';
+    listButton.setAttribute('class','btn');
     listButton.addEventListener('click', function(){
         location.href="board.html";
     });

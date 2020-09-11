@@ -23,6 +23,27 @@ function loadBoard(){
 }
 
 
+
+
+
+function makePageIndex(){
+    let div=document.createElement('div');
+    div.style.textAlign='center';
+    div.style.marginTop='2vh';
+    for(let i=0; i<=number2; i++){
+        let span=document.createElement('span');
+        pageArray.push(i);
+        span.innerHTML=` ${pageArray[i]+1} `;
+        document.body.appendChild(span);
+        span.onclick=function(){goToPage(i)};
+        div.appendChild(span);
+    } 
+    document.body.appendChild(div);
+}
+
+
+
+
 function goToPage(pageNumber){
     document.body.innerHTML='';
     makeMenu();
@@ -43,12 +64,13 @@ function goToPage(pageNumber){
     }
 
     let div=document.createElement('div');
-    div.style.marginTop='3vh';
+    div.style.marginTop='2vh';
     div.style.marginLeft='5vw';
     div.style.marginBottom='1vh';
     let writeButton=document.createElement('button');
     let writeButtonText=document.createTextNode('글쓰기');
     writeButton.appendChild(writeButtonText);
+    writeButton.setAttribute('class','btn');
     writeButton.addEventListener('click', function(){
         location.href='write.html';
     });    
@@ -86,21 +108,21 @@ function clickPosting(index, title, content){
     listButton.appendChild(listText);
     listButton.style.marginTop='3vh';
     listButton.style.marginLeft='5vw';
-    listButton.setAttribute('class','buttons');
+    listButton.setAttribute('class','btn');
     listButton.addEventListener('click', moveToList);
 
     let modifyButton=document.createElement('button');
     document.body.appendChild(modifyButton);
     let modifyText=document.createTextNode('수정');
     modifyButton.appendChild(modifyText);
-    modifyButton.setAttribute('class','buttons');
+    modifyButton.setAttribute('class','btn');
     modifyButton.addEventListener('click', modifyPosting);
 
     let deleteButton=document.createElement('button');
     document.body.appendChild(deleteButton);
     let deleteText=document.createTextNode('삭제');
     deleteButton.appendChild(deleteText);
-    deleteButton.setAttribute('class','buttons');
+    deleteButton.setAttribute('class','btn');
     deleteButton.addEventListener('click', erasePosting);
 
 
@@ -115,20 +137,28 @@ function clickPosting(index, title, content){
         let form=document.createElement('form');
         form.style.marginTop='3vh';
         form.style.marginLeft='5vw';
+        form.style.width='90vw';
         let titleInput=document.createElement('input');
         titleInput.type='text';
         titleInput.setAttribute('id','titleInput2');
-        titleInput.setAttribute('value',title);        
+        titleInput.setAttribute('value',title);  
+        titleInput.style.width='90vw';      
         form.appendChild(titleInput);
-
+        let br=document.createElement('br');
+        form.appendChild(br);
         let contentInput=document.createElement('input');
         contentInput.type='text';
         contentInput.setAttribute('id','contentInput2');
         contentInput.setAttribute('value',content);
+        contentInput.style.width='90vw';
+        contentInput.style.height='50vh';
         form.appendChild(contentInput);
-
+        let br2=document.createElement('br');
+        form.appendChild(br2);
         let submitButton=document.createElement('input');
         submitButton.type='submit';
+        submitButton.style.marginTop='3vh';
+        submitButton.setAttribute('class','btn');
         form.appendChild(submitButton);
         document.body.appendChild(form);
         form.addEventListener('submit', editPosting);
@@ -262,29 +292,35 @@ function moveToHome(){
 function makeTable(variable, variable2){
 
     let table=document.createElement('table');
-    table.style.border='1px solid black';
     table.style.marginTop='3vh';
     table.style.marginLeft='5vw';
     table.style.marginRight='5vw';
+
     let firstRow=document.createElement('tr');
     firstRow.style.textAlign='center';
-
+    firstRow.style.backgroundColor='#e3e3e3';
+    
     let index=document.createElement('td');
     let indexText=document.createTextNode('번호');
-    index.style.border='1px solid black';
     index.appendChild(indexText);
+    index.style.width='15vw';
+    index.style.paddingTop='1.5vh';
+    index.style.paddingBottom='1.5vh';
+    index.style.border='1px #e3e3e3 solid';
     firstRow.appendChild(index);
 
     let title=document.createElement('td');
     let titleText=document.createTextNode('제목');
-    title.style.border='1px solid black';
     title.appendChild(titleText);
+    title.style.border='1px #e3e3e3 solid';
+    title.style.width='60vw';
     firstRow.appendChild(title);
 
     let date=document.createElement('td');
     let dateText=document.createTextNode('작성일');
-    date.style.border='1px solid black';
     date.appendChild(dateText);
+    date.style.width='50vw';
+    date.style.border='1px #e3e3e3 solid';
     firstRow.appendChild(date);
     
     table.appendChild(firstRow);
@@ -293,25 +329,28 @@ function makeTable(variable, variable2){
     for(let i=variable; i>=variable2; i--){
         let item=parsedList[i];
         let tr=document.createElement('tr');
-        tr.style.border='1px solid black';
         tr.style.textAlign='center';
-
+        tr.style.paddiing='2vh';
+        if(i%2===0){
+            tr.style.backgroundColor='white';
+        }else{
+            tr.style.backgroundColor='#f7f5f5';
+        }
             let td=document.createElement('td');
-            td.style.border='1px solid black';
-            td.style.width='10vw';
+            td.style.width='15vw';
             td.textContent=item.index+1;
+            td.style.paddingTop='1.5vh';
+            td.style.paddingBottom='1.5vh';
             tr.appendChild(td); 
 
             let td2=document.createElement('td');
-            td2.style.border='1px solid black';
             td2.style.width='60vw';
             td2.textContent=item.title;
             td2.onclick=function(){clickPosting(item.index, item.title, item.content)};
             tr.appendChild(td2);            
 
             let td3=document.createElement('td');
-            td3.style.border='1px solid black';
-            td3.style.width='40vw';
+            td3.style.width='50vw';
             td3.textContent=item.date;
             tr.appendChild(td3);
             table.appendChild(tr);
@@ -320,22 +359,6 @@ function makeTable(variable, variable2){
     document.body.appendChild(table);
 }
 
-
-
-function makePageIndex(){
-    let div=document.createElement('div');
-    div.style.textAlign='center';
-    div.style.marginTop='2vh';
-    for(let i=0; i<=number2; i++){
-        let span=document.createElement('span');
-        pageArray.push(i);
-        span.innerHTML=` ${pageArray[i]+1} `;
-        document.body.appendChild(span);
-        span.onclick=function(){goToPage(i)};
-        div.appendChild(span);
-    } 
-    document.body.appendChild(div);
-}
 
 
 
@@ -373,10 +396,11 @@ function replyInput(index){
     input.placeholder='댓글';
     input.style.marginTop='3vh';
     input.style.marginLeft='5vw';
+    input.style.marginRight='2vw';
     replyForm.appendChild(input);
-
     let submitButton2=document.createElement('input');
     submitButton2.type='submit';
+    submitButton2.setAttribute('class','replybtn');
     replyForm.appendChild(submitButton2);
     document.body.appendChild(replyForm);
     replyForm.addEventListener('submit',submitReply);
@@ -415,6 +439,8 @@ function replyInput(index){
         
         let div=document.createElement('div');
         div.textContent=item.content;
+        div.style.marginLeft='5vw';
+        div.style.marginTop='0.5vh';
         document.body.appendChild(div);
     }
 
