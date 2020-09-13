@@ -1,6 +1,13 @@
 let list=localStorage.getItem('postingList');
 let parsedList=JSON.parse(list);
-let number=parsedList.length-1;
+let length=parsedList.length;
+let number;
+if(length!==0){
+    number=parsedList.length-1;
+}else{
+    number=0;
+}
+
 let number2=Math.ceil(number/10);
 let number3;
 let pageArray=[];
@@ -20,7 +27,7 @@ function loadBoard(){
  
     let variable=number;
     let variable2;
-    if(variable>10){
+    if(variable>9){
         variable2=number-9;
     }else{
         variable2=0;
