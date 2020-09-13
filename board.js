@@ -1,4 +1,4 @@
-let list=localStorage.getItem('postingList1');
+let list=localStorage.getItem('postingList');
 let parsedList=JSON.parse(list);
 let number=parsedList.length-1;
 let number2=Math.ceil(number/10);
@@ -6,23 +6,29 @@ let number3;
 let pageArray=[];
 
 
-        
-
 init();
+
 
 function init(){
     loadBoard();
 }
 
 
-function loadBoard(){     
+
+
+function loadBoard(){  
+ 
     let variable=number;
-    let variable2=number-9;
+    let variable2;
+    if(variable>10){
+        variable2=number-9;
+    }else{
+        variable2=0;
+    }
+
     makeTable(variable, variable2);     
     makePageIndex();
 }
-
-
 
 
 
@@ -181,27 +187,23 @@ function clickPosting(index, title, content){
                 newContent.setAttribute('value', e.target.value);
             }
             
-            //let list=localStorage.getItem('postingList1');
-            //let parsedList=JSON.parse(list);
             parsedList[index].title=newTitle.value;
             parsedList[index].content=newContent.value;
             let stringfiedArray=JSON.stringify(parsedList);
-            localStorage.setItem('postingList1', stringfiedArray);
+            localStorage.setItem('postingList', stringfiedArray);
             location.href='board.html';
         }
     }
 
 
         function erasePosting(){        
-            //let list=localStorage.getItem('postingList1');
-            //let parsedList=JSON.parse(list);
             parsedList.splice(index,1);
             for(let i=0; i<parsedList.length; i++){
                 temp=i;
                 parsedList[i].index=temp;
             }
             let stringfiedArray=JSON.stringify(parsedList);
-            localStorage.setItem('postingList1', stringfiedArray);
+            localStorage.setItem('postingList', stringfiedArray);
             location.href="board.html";
         }
 }
@@ -373,7 +375,7 @@ function reply(index){
         for(let i=0; i<reply.length; i++){        
               
             let div=document.createElement('div');
-            let data=localStorage.getItem('postingList1');
+            let data=localStorage.getItem('postingList');
             let parsedData=JSON.parse(data);
             div.innerHTML=parsedData[index].replies[i].content;
             div.style.marginLeft='5vw';
@@ -433,7 +435,7 @@ function replyInput(index){
         
 
         let stringifiedArray=JSON.stringify(parsedList);
-        localStorage.setItem('postingList1',stringifiedArray);
+        localStorage.setItem('postingList',stringifiedArray);
 
         
         input2.value='';

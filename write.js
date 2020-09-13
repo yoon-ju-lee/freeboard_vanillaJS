@@ -5,11 +5,10 @@ init();
 
 function init(){
     
-    let list=localStorage.getItem('postingList1');
+    let list=localStorage.getItem('postingList');
     let parsedList=JSON.parse(list);
     let newList=array.concat(parsedList);
     array=newList;
-    //console.log(array);
 }
 
 
@@ -41,7 +40,7 @@ function submitForm(event){
     item.index=key;
 
     let stringfiedArray=JSON.stringify(array);
-    localStorage.setItem('postingList1', stringfiedArray);
+    localStorage.setItem('postingList', stringfiedArray);
     
 
     showPosting();
@@ -50,7 +49,7 @@ function submitForm(event){
 
 function showPosting(){
     document.body.innerHTML='';
-    let list=localStorage.getItem('postingList1');
+    let list=localStorage.getItem('postingList');
     let parsedList=JSON.parse(list);
     let item=parsedList[parsedList.length-1]; 
     let showTitle=item.title;
