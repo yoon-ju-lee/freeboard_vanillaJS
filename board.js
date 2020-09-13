@@ -1,7 +1,7 @@
 let list=localStorage.getItem('postingList');
 let parsedList=JSON.parse(list);
 let number;
-if(parsedList!==null){
+if(parsedList!==undefined){
     number=parsedList.length-1;
 }else{
     number=0;
