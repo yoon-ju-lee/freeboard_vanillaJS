@@ -397,6 +397,7 @@ function replyInput(index){
     input.style.marginTop='3vh';
     input.style.marginLeft='5vw';
     input.style.marginRight='2vw';
+    input.style.width='30vw';
     replyForm.appendChild(input);
     let submitButton2=document.createElement('input');
     submitButton2.type='submit';
