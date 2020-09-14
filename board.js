@@ -1,10 +1,8 @@
 let list=localStorage.getItem('postingList');
 let parsedList=JSON.parse(list);
 let number;
-if(parsedList!==undefined){
+if(parsedList!==null){
     number=parsedList.length-1;
-}else{
-    number=0;
 }
 
 let number2=Math.ceil(number/10);
@@ -32,8 +30,13 @@ function loadBoard(){
         variable2=0;
     }
 
-    makeTable(variable, variable2);     
-    makePageIndex();
+    if(number!==0){
+        makeTable(variable, variable2);     
+        makePageIndex();
+    }else{        
+        makeTable(0,0);
+    }
+    
 }
 
 
@@ -59,9 +62,8 @@ function makePageIndex(){
 function goToPage(pageNumber){
     document.body.innerHTML='';
     makeMenu();
-   
 
-    number3=number-10*pageNumber;  
+    number3=number-10*pageNumber; 
 
     if(number3>9){
         let variable=number3;
@@ -333,7 +335,6 @@ function makeTable(variable, variable2){
     
     table.appendChild(firstRow);
 
-
     for(let i=variable; i>=variable2; i--){
         let item=parsedList[i];
         let tr=document.createElement('tr');
@@ -420,7 +421,6 @@ function replyInput(index){
         let replyForm=e.target;
         let input2=replyForm.querySelector('input');
         let value=input2.value;
-        console.log(value);
 
         let item={};
         item.content=value;

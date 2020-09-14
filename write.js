@@ -7,8 +7,11 @@ function init(){
     
     let list=localStorage.getItem('postingList');
     let parsedList=JSON.parse(list);
-    let newList=array.concat(parsedList);
-    array=newList;
+    if(parsedList!==null){
+        let newList=array.concat(parsedList);
+        array=newList;
+    }
+    
 }
 
 
