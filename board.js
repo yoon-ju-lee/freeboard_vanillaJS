@@ -9,12 +9,15 @@ let number2=Math.ceil(number/10);
 let number3;
 let pageArray=[];
 
-
+localStorage.removeItem('postingList');
+localStorage.removeItem('postingList1');
+localStorage.removeItem('username');
 init();
 
 
 function init(){
     loadBoard();
+
 }
 
 
@@ -103,9 +106,10 @@ function clickPosting(index, title, content){
     table.style.marginTop='3vh';
     table.style.marginLeft='5vw';
     table.style.width='90vw';
+
     let tr2=document.createElement('tr');
     tr2.textContent=title;
-    tr2.style.border='1px solid black';   
+    tr2.style.border='1px solid black';
     table.appendChild(tr2);
 
     let tr3=document.createElement('tr');
@@ -141,8 +145,8 @@ function clickPosting(index, title, content){
 
 
     replyInput(index);  
-    reply(index);
-    
+
+    reply(index);    
     
 
 
@@ -371,32 +375,6 @@ function makeTable(variable, variable2){
 
 
 
-
-
-function reply(index){
-    
-    if(parsedList[index].replies!==undefined){
-        let reply=parsedList[index].replies;
-    
-
-        for(let i=0; i<reply.length; i++){        
-              
-            let div=document.createElement('div');
-            let data=localStorage.getItem('postingList');
-            let parsedData=JSON.parse(data);
-            div.innerHTML=parsedData[index].replies[i].content;
-            div.style.marginLeft='5vw';
-            div.style.marginTop='0.5vh';
-            document.body.appendChild(div);  
-                     
-        } 
-    }
-} 
-
-
-
-
-
 function replyInput(index){
     let replyArray=[];
     let replyForm=document.createElement('form');    
@@ -454,4 +432,24 @@ function replyInput(index){
     }
 
 }
+
+
+
+function reply(index){
+    if(parsedList[index].replies!==undefined){
+        let reply=parsedList[index].replies;
+    
+        let replyContainer=document.createElement('div');
+        document.body.appendChild(replyContainer);
+        
+        for(let i=0; i<reply.length; i++){       
+            let div=document.createElement('div');
+            div.innerHTML=parsedList[index].replies[i].content;
+            div.style.marginLeft='5vw';
+            div.style.marginTop='0.5vh';
+            replyContainer.appendChild(div);            
+        }  
+    }
+    
+} 
 
