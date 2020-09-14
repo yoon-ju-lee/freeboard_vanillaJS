@@ -1,4 +1,4 @@
-let list=localStorage.getItem('postingList');
+let list=localStorage.getItem('postings');
 let parsedList=JSON.parse(list);
 let number;
 if(parsedList!==null){
@@ -9,9 +9,6 @@ let number2=Math.ceil(number/10);
 let number3;
 let pageArray=[];
 
-localStorage.removeItem('postingList');
-localStorage.removeItem('postingList1');
-localStorage.removeItem('username');
 init();
 
 
@@ -202,7 +199,7 @@ function clickPosting(index, title, content){
             parsedList[index].title=newTitle.value;
             parsedList[index].content=newContent.value;
             let stringfiedArray=JSON.stringify(parsedList);
-            localStorage.setItem('postingList', stringfiedArray);
+            localStorage.setItem('postings', stringfiedArray);
             location.href='board.html';
         }
     }
@@ -215,7 +212,7 @@ function clickPosting(index, title, content){
                 parsedList[i].index=temp;
             }
             let stringfiedArray=JSON.stringify(parsedList);
-            localStorage.setItem('postingList', stringfiedArray);
+            localStorage.setItem('postings', stringfiedArray);
             location.href="board.html";
         }
 }
@@ -419,7 +416,7 @@ function replyInput(index){
         
 
         let stringifiedArray=JSON.stringify(parsedList);
-        localStorage.setItem('postingList',stringifiedArray);
+        localStorage.setItem('postings',stringifiedArray);
 
         
         input2.value='';
