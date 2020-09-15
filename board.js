@@ -98,22 +98,33 @@ function goToPage(pageNumber){
 
 function clickPosting(index, title, content){
     document.body.innerHTML='';
+
     let table=document.createElement('table');
     table.style.border='1px solid black';
     table.style.marginTop='3vh';
     table.style.marginLeft='5vw';
     table.style.width='90vw';
+    table.style.paddingTop='1vh';
+    table.style.paddingBottom='1vh';
+    table.style.paddingLeft='1vw';
+
+    let tr1=document.createElement('tr');
+    tr1.style.border='1px solid black';
+    let td1=document.createElement('td');
+    td1.textContent=title;
+    td1.style.padding='1vh';
+    tr1.appendChild(td1);
+    table.appendChild(tr1);
 
     let tr2=document.createElement('tr');
-    tr2.textContent=title;
     tr2.style.border='1px solid black';
+    let td2=document.createElement('td');
+    td2.textContent=content;
+    td2.style.padding='1vh';
+    td2.style.height='40vh';
+    tr2.appendChild(td2);
     table.appendChild(tr2);
 
-    let tr3=document.createElement('tr');
-    tr3.textContent=content;
-    tr3.style.border='1px solid black';
-    tr3.style.height='30vh';
-    table.appendChild(tr3);
     document.body.appendChild(table);
 
 
@@ -157,7 +168,8 @@ function clickPosting(index, title, content){
         titleInput.type='text';
         titleInput.setAttribute('id','titleInput2');
         titleInput.setAttribute('value',title);  
-        titleInput.style.width='90vw';      
+        titleInput.style.width='90vw';
+        titleInput.style.padding='1vh';     
         form.appendChild(titleInput);
         let br=document.createElement('br');
         form.appendChild(br);
@@ -167,6 +179,7 @@ function clickPosting(index, title, content){
         contentInput.setAttribute('value',content);
         contentInput.style.width='90vw';
         contentInput.style.height='50vh';
+        contentInput.style.padding='1vh';
         form.appendChild(contentInput);
         let br2=document.createElement('br');
         form.appendChild(br2);
@@ -373,7 +386,7 @@ function makeTable(variable, variable2){
 
 
 function replyInput(index){
-    let replyArray=[];
+  
     let replyForm=document.createElement('form');    
     let input=document.createElement('input');
     input.type='text';
@@ -391,8 +404,9 @@ function replyInput(index){
     replyForm.addEventListener('submit',submitReply);
 
 
-    function submitReply(e){
+    function submitReply(e){       
         e.preventDefault();
+        let replyArray=[];
         let replyForm=e.target;
         let input2=replyForm.querySelector('input');
         let value=input2.value;
@@ -449,4 +463,3 @@ function reply(index){
     }
     
 } 
-
